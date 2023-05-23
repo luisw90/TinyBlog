@@ -3,21 +3,45 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --main-color: rgb(140, 157, 143);
+  --secondary-color: rgb(209, 209, 209);
+  --header-height: 300px;
 }
 
 .header__container {
-  height: 60px;
-  background-color: rgb(226, 211, 203);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--header-height);
+  background-color: var(--main-color);
+  border-bottom: 1px solid white;
+}
+
+.header__image {
+  position: absolute;
+  width: 100vw;
+  height: var(--header-height);
+  z-index: 1;
+  object-fit: cover;
+}
+
+.header__logocontainer {
+  padding-inline: 10px;
+  padding-block: 10px;
+  background-color: white;
+  z-index: 2;
+}
+
+.header__logo {
+  font-size: 3em;
+  color: rgb(37, 37, 37);
 }
 
 .blog__container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: rgb(226, 211, 203);
+  background-color: var(--main-color);
   padding-bottom: 50px;
 }
 
@@ -27,7 +51,7 @@
   flex-direction: column;
   justify-content: center;
   padding-block: 20px;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
   width: 100vw;
   z-index: 1;
@@ -36,24 +60,42 @@
 .blogDropdown__button {
   display: flex;
   background-color: white;
-  padding-inline: 40px;
-  padding-block: 20px;
+  padding-inline: 25px;
+  padding-block: 5px;
+  align-items: center;
   gap: 10px;
   border-radius: 10px;
+  color: rgb(64, 64, 64);
+}
+
+.blogDropdown__title {
+  font-size: 1.2em;
+}
+
+.blogDropdown__icon {
+  width: 12px;
+  height: 9px;
 }
 
 .blogDropdown__itemcontainer {
   display: flex;
+  flex-direction: column;
   background-color: white;
-  padding-inline: 40px;
-  padding-block: 20px;
-  gap: 10px;
+  padding-inline: 60px;
+  padding-block: 10px;
+  gap: 20px;
   border-radius: 10px;
+  outline: 0.3px solid rgb(209, 209, 209);
+  display: hidden;
+}
+
+.blogDropdown__item {
+  border-bottom: 0.3px solid rgb(209, 209, 209);
 }
 
 .postsSection__container {
   position: relative;
-  top: 100px;
+  top: 70px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -65,7 +107,7 @@
   flex-direction: column;
   background-color: white;
   padding-inline: 40px;
-  padding-block: 40px;
+  padding-block: 20px;
   border-radius: 10px;
   gap: 10px;
   width: 50%;
@@ -73,6 +115,7 @@
 
 .postCard__title {
   font-size: 1.3em;
+  font-weight: 500;
   opacity: 0.7;
 }
 
@@ -85,6 +128,7 @@
 .postCard__innercontainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 20px;
   align-items: center;
 }
@@ -94,12 +138,24 @@
   gap: 10px;
 }
 
+.postCard__reactioncontainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.postCard__reaction-image {
+  width: 20px;
+  height: 20px;
+}
+
 .postCard__tag {
   padding-inline: 10px;
   padding-block: 5px;
   border-radius: 4px;
-  outline: 0.1px solid rgb(144, 144, 144);
-  color: rgb(104, 104, 104);
+
+  background-color: var(--main-color);
+  color: rgb(255, 255, 255);
 }
 
 .postCard__tag:hover {
@@ -111,5 +167,5 @@
 .footer__container {
   height: 100px;
   top: 100px;
-  background-color: rgb(183, 183, 183);
+  background-color: var(--main-color);
 }

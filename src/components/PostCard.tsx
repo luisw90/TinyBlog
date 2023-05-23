@@ -25,7 +25,10 @@ export const PostCard: FC<PostProps> = ({ post, changeBlogHandle }) => {
             );
           })}
         </div>
-        <div>reactions: {post.reactions}</div>
+        <div className="postCard__reactioncontainer">
+          <img className="postCard__reaction-image" src="like2.png" alt="" />
+          <div>{post.reactions}</div>
+        </div>
       </div>
     </div>
   );
