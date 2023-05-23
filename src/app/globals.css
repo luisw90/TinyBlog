@@ -8,20 +8,108 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.header__container {
+  height: 60px;
+  background-color: rgb(226, 211, 203);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.blog__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgb(226, 211, 203);
+  padding-bottom: 50px;
+}
+
+.blogDropdown__container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 20px;
+  gap: 20px;
+  align-items: center;
+  width: 100vw;
+  z-index: 1;
+}
+
+.blogDropdown__button {
+  display: flex;
+  background-color: white;
+  padding-inline: 40px;
+  padding-block: 20px;
+  gap: 10px;
+  border-radius: 10px;
+}
+
+.blogDropdown__itemcontainer {
+  display: flex;
+  background-color: white;
+  padding-inline: 40px;
+  padding-block: 20px;
+  gap: 10px;
+  border-radius: 10px;
+}
+
+.postsSection__container {
+  position: relative;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.postCard__container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-inline: 40px;
+  padding-block: 40px;
+  border-radius: 10px;
+  gap: 10px;
+  width: 50%;
+}
+
+.postCard__title {
+  font-size: 1.3em;
+  opacity: 0.7;
+}
+
+.postCard__body {
+  font-size: 0.9em;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.postCard__innercontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.postCard__tagcontainer {
+  display: flex;
+  gap: 10px;
+}
+
+.postCard__tag {
+  padding-inline: 10px;
+  padding-block: 5px;
+  border-radius: 4px;
+  outline: 0.1px solid rgb(144, 144, 144);
+  color: rgb(104, 104, 104);
+}
+
+.postCard__tag:hover {
+  outline: 0.1px solid rgb(144, 144, 144);
+  background-color: rgb(120, 120, 120);
+  color: rgb(255, 255, 255);
+}
+
+.footer__container {
+  height: 100px;
+  top: 100px;
+  background-color: rgb(183, 183, 183);
 }
