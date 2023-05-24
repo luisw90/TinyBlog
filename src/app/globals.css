@@ -5,7 +5,7 @@
 :root {
   --main-color: rgb(140, 157, 143);
   --secondary-color: rgb(209, 209, 209);
-  --header-height: 300px;
+  --header-height: 100px;
 }
 
 .header__container {
@@ -14,7 +14,6 @@
   align-items: center;
   height: var(--header-height);
   background-color: var(--main-color);
-  border-bottom: 1px solid white;
 }
 
 .header__image {
@@ -90,6 +89,8 @@
 }
 
 .blogDropdown__item {
+  display: flex;
+  gap: 10px;
   border-bottom: 0.3px solid rgb(209, 209, 209);
 }
 

@@ -3,7 +3,7 @@ import { Post } from "@/Types";
 
 type PostProps = {
   post: Post;
-  changeBlogHandle: (title: string) => void;
+  changeBlogHandle: (title: string[]) => void;
 };
 export const PostCard: FC<PostProps> = ({ post, changeBlogHandle }) => {
   return (
@@ -18,7 +18,7 @@ export const PostCard: FC<PostProps> = ({ post, changeBlogHandle }) => {
                 className="postCard__tag"
                 key={tag}
                 value={tag}
-                onClick={(e) => changeBlogHandle(e.currentTarget.value)}
+                onClick={(e) => changeBlogHandle([e.currentTarget.value])}
               >
                 {tag}
               </button>

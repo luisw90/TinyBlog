@@ -13,6 +13,7 @@ export default function Home() {
 
   const [blogTitles, setBlogTitles] = useState<string[]>([]);
   const [currentPosts, setCurrentPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     /*
     const fecthData = async () => {
@@ -33,13 +34,12 @@ export default function Home() {
       });
     });
     setBlogTitles(tagArray);
-    changeBlogHandle(tagArray[0]);
-    console.log(tagArray);
+    changeBlogHandle([tagArray[0]]);
   }, []);
 
-  const changeBlogHandle = (blogtitle: string) => {
+  const changeBlogHandle = (blogtitle: string[]) => {
     const currentP = dummyData.filter((post) => {
-      if (post.tags.includes(blogtitle)) {
+      if (post.tags.some((substring) => blogtitle.includes(substring))) {
         return post;
       }
     });

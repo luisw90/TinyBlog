@@ -4,7 +4,7 @@ import { PostCard } from "./PostCard";
 
 type PostSectionsProps = {
   posts: Post[];
-  changeBlogHandle: (title: string) => void;
+  changeBlogHandle: (title: string[]) => void;
 };
 
 export const PostSection: FC<PostSectionsProps> = ({
