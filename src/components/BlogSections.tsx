@@ -3,20 +3,25 @@ import { PostSection } from "./PostSection";
 import { Post } from "@/Types";
 
 type BlogSectionsProps = {
-  blogTitles: string[];
-  changeBlogHandle: (title: string[]) => void;
+  blogTags: string[];
+  changeBlogs: (title: string[]) => void;
 };
 
 export const BlogSections: FC<BlogSectionsProps> = ({
-  blogTitles,
-  changeBlogHandle,
+  blogTags,
+  changeBlogs,
 }) => {
   const [open, setOpen] = useState(false);
   const [currentTags, setCurrentTags] = useState([""]);
 
   useEffect(() => {
-    setCurrentTags([blogTitles[0]]);
-  }, [blogTitles]);
+    const randomTag = blogTags[Math.floor(Math.random() * blogTags.length)];
+    setCurrentTags([randomTag]);
+  }, [blogTags]);
+
+  useEffect(() => {
+    changeBlogs(currentTags);
+  }, [currentTags]);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -32,34 +37,29 @@ export const BlogSections: FC<BlogSectionsProps> = ({
       );
       setCurrentTags(newTagArray);
     }
-    changeBlogHandle(currentTags);
   };
 
   return (
     <div className="blogDropdown__container">
       <button className="blogDropdown__button" onClick={handleOpen}>
-        <div className="blogDropdown__title">{currentTags}</div>
+        <div className="blogDropdown__title">{currentTags.join(" / ")}</div>
         <img className="blogDropdown__icon" src="dropDown.png" alt="" />
       </button>
 
       {open ? (
         <ul className="blogDropdown__itemcontainer">
-          {blogTitles &&
-            blogTitles.map((title, index) => {
+          {blogTags &&
+            blogTags.map((tag) => {
               let checkboxState = false;
-              if (currentTags.includes(title)) {
+              if (currentTags.includes(tag)) {
                 checkboxState = true;
               }
               return (
-                <button
-                  className="blogDropdown__item"
-                  key={title}
-                  value={title}
-                >
-                  {title}
+                <button className="blogDropdown__item" key={tag} value={tag}>
+                  {tag}
                   <input
                     type="checkbox"
-                    value={title}
+                    value={tag}
                     defaultChecked={checkboxState}
                     onChange={handleCheckbox}
                   />
@@ -71,34 +71,3 @@ export const BlogSections: FC<BlogSectionsProps> = ({
     </div>
   );
 };
-
-/*
-{open ? (
-  <ul className="blogDropdown__itemcontainer">
-    {blogTitles &&
-      blogTitles.map((title) => {
-        return (
-          <li
-            className="blogDropdown__item"
-            key={title}
-            value={title}
-            onClick={(e) => {
-              setOpen(false);
-              setCurrentBlog(e.currentTarget.value);
-              changeBlogHandle(e.currentTarget.value);
-            }}
-          >
-            {title}
-          </li>
-        );
-      })}
-  </ul>
-) : null}
-
-
-checkList.addEventListener("blur", function (e: any) {
-  if (!e.relatedTarget || !e.relatedTarget.classList.contains("anchor")) {
-    checkList.setAttribute("class", "dropdown-check-list");
-  }
-});
-*/

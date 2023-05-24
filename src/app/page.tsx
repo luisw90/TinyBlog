@@ -10,49 +10,62 @@ import { PostSection } from "@/components/PostSection";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
-
-  const [blogTitles, setBlogTitles] = useState<string[]>([]);
+  const [blogTags, setBlogTags] = useState<string[]>([]);
   const [currentPosts, setCurrentPosts] = useState<Post[]>([]);
 
+  /*
   useEffect(() => {
-    /*
-    const fecthData = async () => {
+    const fecthAllPosts = async () => {
       const posts = await getPosts();
       setPosts(posts);
-    };
-    fecthData();
-    */
-    setPosts(dummyData);
-    console.log(dummyData);
 
-    let tagArray: string[] = [];
+      let noDuplicatesTagArray: string[] = [];
+      posts.map((array: Post) => {
+        array.tags.map((tag) => {
+          if (!noDuplicatesTagArray.includes(tag)) {
+            noDuplicatesTagArray.push(tag);
+          }
+        });
+      });
+      setBlogTags(noDuplicatesTagArray);
+    };
+    fecthAllPosts();
+  }, []);
+*/
+
+  useEffect(() => {
+    setPosts(dummyData);
+
+    let noDuplicatesTagArray: string[] = [];
     dummyData.map((array) => {
       array.tags.map((tag) => {
-        if (!tagArray.includes(tag)) {
-          tagArray.push(tag);
+        if (!noDuplicatesTagArray.includes(tag)) {
+          noDuplicatesTagArray.push(tag);
         }
       });
     });
-    setBlogTitles(tagArray);
-    changeBlogHandle([tagArray[0]]);
+    setBlogTags(noDuplicatesTagArray);
   }, []);
 
-  const changeBlogHandle = (blogtitle: string[]) => {
-    const currentP = dummyData.filter((post) => {
-      if (post.tags.some((substring) => blogtitle.includes(substring))) {
-        return post;
+  const changeBlogs = (newblogtags: string[]) => {
+    const currentBlogs = dummyData.filter((post) => {
+      if (post.tags.some((currenttags) => newblogtags.includes(currenttags))) {
+        const findMatchingTag = post.tags.filter((tag) =>
+          newblogtags.includes(tag)
+        );
+        const addImageToNewPostObject = Object.assign(post, {
+          image: `${findMatchingTag[0]}.jpg`,
+        });
+        return addImageToNewPostObject;
       }
     });
-    setCurrentPosts(currentP);
+    setCurrentPosts(currentBlogs);
   };
 
   return (
     <main className="blog__container">
-      <BlogSections
-        blogTitles={blogTitles}
-        changeBlogHandle={changeBlogHandle}
-      />
-      <PostSection posts={currentPosts} changeBlogHandle={changeBlogHandle} />
+      <BlogSections blogTags={blogTags} changeBlogs={changeBlogs} />
+      <PostSection posts={currentPosts} changeBlogs={changeBlogs} />
     </main>
   );
 }

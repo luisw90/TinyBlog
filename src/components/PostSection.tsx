@@ -1,28 +1,26 @@
 import React, { FC } from "react";
 import { Post } from "@/Types";
 import { PostCard } from "./PostCard";
+import { Masonry } from "@mui/lab";
 
 type PostSectionsProps = {
   posts: Post[];
-  changeBlogHandle: (title: string[]) => void;
+  changeBlogs: (tags: string[]) => void;
 };
 
-export const PostSection: FC<PostSectionsProps> = ({
-  posts,
-  changeBlogHandle,
-}) => {
+export const PostSection: FC<PostSectionsProps> = ({ posts, changeBlogs }) => {
   return (
     <div className="postsSection__container">
-      {posts &&
-        posts.map((post: Post) => {
-          return (
-            <PostCard
-              key={post.id}
-              post={post}
-              changeBlogHandle={changeBlogHandle}
-            />
-          );
-        })}
+      <div className="postsSection__postscontainer">
+        <Masonry columns={4}>
+          {posts &&
+            posts.map((post: Post) => {
+              return (
+                <PostCard key={post.id} post={post} changeBlogs={changeBlogs} />
+              );
+            })}
+        </Masonry>
+      </div>
     </div>
   );
 };

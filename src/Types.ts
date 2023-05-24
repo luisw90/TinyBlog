@@ -5,5 +5,6 @@ type Post = {
   userId: number;
   tags: string[];
   reactions: number;
+  image?: string;
 };
 export type { Post };
