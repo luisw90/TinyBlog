@@ -17,7 +17,7 @@ export const BlogSections: FC<BlogSectionsProps> = ({
     setOpen(!open);
   };
 
-  if (window !== undefined) {
+  if (typeof window !== "undefined") {
     window.addEventListener("click", function (e: any) {
       if (!document.getElementById("dropdown")?.contains(e.target)) {
         if (
