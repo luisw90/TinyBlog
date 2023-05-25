@@ -17,15 +17,25 @@ export const BlogSections: FC<BlogSectionsProps> = ({
     setOpen(!open);
   };
 
+  window.addEventListener("click", function (e: any) {
+    if (!document.getElementById("dropdown")?.contains(e.target)) {
+      if (!document.getElementById("dropdown__container")?.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+  });
+
   return (
     <div className="blogDropdown__container">
       <button className="blogDropdown__button" onClick={handleOpen}>
-        <div className="blogDropdown__title">{currentTags.join(" / ")}</div>
+        <div id="dropdown" className="blogDropdown__title">
+          {currentTags.join(" / ")}
+        </div>
         <img className="blogDropdown__icon" src="dropDown.png" alt="" />
       </button>
 
       {open ? (
-        <ul className="blogDropdown__itemcontainer">
+        <ul id="dropdown__container" className="blogDropdown__itemcontainer">
           {allTags &&
             allTags.map((tag) => {
               let checkboxState = false;
@@ -33,7 +43,7 @@ export const BlogSections: FC<BlogSectionsProps> = ({
                 checkboxState = true;
               }
               return (
-                <button className="blogDropdown__item" key={tag} value={tag}>
+                <div className="blogDropdown__item" key={tag}>
                   {tag}
                   <input
                     type="checkbox"
@@ -41,7 +51,7 @@ export const BlogSections: FC<BlogSectionsProps> = ({
                     defaultChecked={checkboxState}
                     onChange={handleCheckbox}
                   />
-                </button>
+                </div>
               );
             })}
         </ul>
