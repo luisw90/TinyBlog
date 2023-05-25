@@ -5,10 +5,10 @@ import { Masonry } from "@mui/lab";
 
 type PostSectionsProps = {
   posts: Post[];
-  changeBlogs: (tags: string[]) => void;
+  changeTags: (tag: string[]) => void;
 };
 
-export const PostSection: FC<PostSectionsProps> = ({ posts, changeBlogs }) => {
+export const PostSection: FC<PostSectionsProps> = ({ posts, changeTags }) => {
   return (
     <div className="postsSection__container">
       <div className="postsSection__postscontainer">
@@ -16,7 +16,7 @@ export const PostSection: FC<PostSectionsProps> = ({ posts, changeBlogs }) => {
           {posts &&
             posts.map((post: Post) => {
               return (
-                <PostCard key={post.id} post={post} changeBlogs={changeBlogs} />
+                <PostCard key={post.id} post={post} changeTags={changeTags} />
               );
             })}
         </Masonry>

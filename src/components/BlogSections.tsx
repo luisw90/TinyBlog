@@ -1,42 +1,20 @@
-import React, { FC, useEffect, useRef, useState } from "react";
-import { PostSection } from "./PostSection";
-import { Post } from "@/Types";
+import React, { FC, useState } from "react";
 
 type BlogSectionsProps = {
-  blogTags: string[];
-  changeBlogs: (title: string[]) => void;
+  allTags: string[];
+  currentTags: string[];
+  handleCheckbox: (e: any) => void;
 };
 
 export const BlogSections: FC<BlogSectionsProps> = ({
-  blogTags,
-  changeBlogs,
+  allTags,
+  currentTags,
+  handleCheckbox,
 }) => {
   const [open, setOpen] = useState(false);
-  const [currentTags, setCurrentTags] = useState([""]);
-
-  useEffect(() => {
-    const randomTag = blogTags[Math.floor(Math.random() * blogTags.length)];
-    setCurrentTags([randomTag]);
-  }, [blogTags]);
-
-  useEffect(() => {
-    changeBlogs(currentTags);
-  }, [currentTags]);
 
   const handleOpen = () => {
     setOpen(!open);
-  };
-
-  const handleCheckbox = (e: any) => {
-    const tag = e.target.value;
-    if (e.target.checked) {
-      setCurrentTags((oldBlogArray) => [...oldBlogArray, tag]);
-    } else {
-      const newTagArray = currentTags.filter(
-        (cuurentTag) => cuurentTag !== tag
-      );
-      setCurrentTags(newTagArray);
-    }
   };
 
   return (
@@ -48,8 +26,8 @@ export const BlogSections: FC<BlogSectionsProps> = ({
 
       {open ? (
         <ul className="blogDropdown__itemcontainer">
-          {blogTags &&
-            blogTags.map((tag) => {
+          {allTags &&
+            allTags.map((tag) => {
               let checkboxState = false;
               if (currentTags.includes(tag)) {
                 checkboxState = true;

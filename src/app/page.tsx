@@ -9,46 +9,49 @@ import { dummyData } from "@/DummyData";
 import { PostSection } from "@/components/PostSection";
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [blogTags, setBlogTags] = useState<string[]>([]);
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [currentPosts, setCurrentPosts] = useState<Post[]>([]);
+  const [currentTags, setCurrentTags] = useState<string[]>([]);
 
-  /*
   useEffect(() => {
     const fecthAllPosts = async () => {
       const posts = await getPosts();
-      setPosts(posts);
-
-      let noDuplicatesTagArray: string[] = [];
-      posts.map((array: Post) => {
+      let allTagsArray: string[] = [];
+      dummyData.map((array) => {
         array.tags.map((tag) => {
-          if (!noDuplicatesTagArray.includes(tag)) {
-            noDuplicatesTagArray.push(tag);
+          if (!allTagsArray.includes(tag)) {
+            allTagsArray.push(tag);
           }
         });
       });
-      setBlogTags(noDuplicatesTagArray);
+      setAllTags(allTagsArray);
+      setAllPosts(posts);
+      const randomTag =
+        allTagsArray[Math.floor(Math.random() * allTagsArray.length)];
+      changeTags([randomTag]);
     };
     fecthAllPosts();
   }, []);
-*/
 
   useEffect(() => {
-    setPosts(dummyData);
+    changeBlogs(currentTags);
+  }, [currentTags]);
 
-    let noDuplicatesTagArray: string[] = [];
-    dummyData.map((array) => {
-      array.tags.map((tag) => {
-        if (!noDuplicatesTagArray.includes(tag)) {
-          noDuplicatesTagArray.push(tag);
-        }
-      });
-    });
-    setBlogTags(noDuplicatesTagArray);
-  }, []);
+  const handleCheckbox = (e: any) => {
+    const tag = e.target.value;
+    if (e.target.checked) {
+      setCurrentTags((oldBlogArray) => [...oldBlogArray, tag]);
+    } else {
+      const newTagArray = currentTags.filter(
+        (cuurentTag) => cuurentTag !== tag
+      );
+      changeTags(newTagArray);
+    }
+  };
 
   const changeBlogs = (newblogtags: string[]) => {
-    const currentBlogs = dummyData.filter((post) => {
+    const currentBlogs = allPosts.filter((post) => {
       if (post.tags.some((currenttags) => newblogtags.includes(currenttags))) {
         const findMatchingTag = post.tags.filter((tag) =>
           newblogtags.includes(tag)
@@ -62,10 +65,18 @@ export default function Home() {
     setCurrentPosts(currentBlogs);
   };
 
+  const changeTags = (tags: string[]) => {
+    setCurrentTags(tags);
+  };
+
   return (
     <main className="blog__container">
-      <BlogSections blogTags={blogTags} changeBlogs={changeBlogs} />
-      <PostSection posts={currentPosts} changeBlogs={changeBlogs} />
+      <BlogSections
+        allTags={allTags}
+        currentTags={currentTags}
+        handleCheckbox={handleCheckbox}
+      />
+      <PostSection posts={currentPosts} changeTags={changeTags} />
     </main>
   );
 }

@@ -3,12 +3,13 @@ import { Post } from "@/Types";
 
 type PostProps = {
   post: Post;
-  changeBlogs: (tags: string[]) => void;
+  changeTags: (tag: string[]) => void;
 };
-export const PostCard: FC<PostProps> = ({ post, changeBlogs }) => {
+export const PostCard: FC<PostProps> = ({ post, changeTags }) => {
   return (
-    <div className="postCard__container">
-      <img className="postCard__image" src={post.image} alt="" />
+    <article className="postCard__container">
+      {/* eslint-disable-next-line @next/next/no-img-element*/}
+      <img className="postCard__image" src={post.image} alt={post.title} />
       <div className="postCard__infocontainer">
         <h1 className="postCard__title">{post.title}</h1>
         <h3 className="postCard__body">{post.body}</h3>
@@ -20,7 +21,7 @@ export const PostCard: FC<PostProps> = ({ post, changeBlogs }) => {
                   className="postCard__tag"
                   key={tag}
                   value={tag}
-                  onClick={(e) => changeBlogs([e.currentTarget.value])}
+                  onClick={(e) => changeTags([e.currentTarget.value])}
                 >
                   {tag}
                 </button>
@@ -28,11 +29,16 @@ export const PostCard: FC<PostProps> = ({ post, changeBlogs }) => {
             })}
           </div>
           <div className="postCard__reactioncontainer">
-            <img className="postCard__reaction-image" src="like2.png" alt="" />
+            {/* eslint-disable-next-line @next/next/no-img-element*/}
+            <img
+              className="postCard__reaction-image"
+              src="like1.png"
+              alt="number of reactions"
+            />
             <div>{post.reactions}</div>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
