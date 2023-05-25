@@ -17,13 +17,17 @@ export const BlogSections: FC<BlogSectionsProps> = ({
     setOpen(!open);
   };
 
-  window.addEventListener("click", function (e: any) {
-    if (!document.getElementById("dropdown")?.contains(e.target)) {
-      if (!document.getElementById("dropdown__container")?.contains(e.target)) {
-        setOpen(false);
+  if (window !== undefined) {
+    window.addEventListener("click", function (e: any) {
+      if (!document.getElementById("dropdown")?.contains(e.target)) {
+        if (
+          !document.getElementById("dropdown__container")?.contains(e.target)
+        ) {
+          setOpen(false);
+        }
       }
-    }
-  });
+    });
+  }
 
   return (
     <div className="blogDropdown__container">
