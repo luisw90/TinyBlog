@@ -18,7 +18,7 @@ export default function Home() {
     const fecthAllPosts = async () => {
       const posts = await getPosts();
       let allTagsArray: string[] = [];
-      dummyData.map((array) => {
+      posts.map((array: Post) => {
         array.tags.map((tag) => {
           if (!allTagsArray.includes(tag)) {
             allTagsArray.push(tag);
