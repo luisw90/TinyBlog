@@ -12,7 +12,7 @@ export const PostSection: FC<PostSectionsProps> = ({ posts, changeTags }) => {
   return (
     <div className="postsSection__container">
       <div className="postsSection__postscontainer">
-        <Masonry columns={4}>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3, xl: 4 }} spacing={2}>
           {posts &&
             posts.map((post: Post) => {
               return (
