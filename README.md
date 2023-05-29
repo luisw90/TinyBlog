@@ -2,7 +2,8 @@
 
 This project was built to continue working on my TypeScript and React skills, Blog entries are fetched and sorted into topics which you can easily filter from a dropdown menu.
 
-Deployed project can be accessed here: https://tiny-blog-drab.vercel.app/
+The deployed project can be accessed here: https://tiny-blog-drab.vercel.app/
+
 <img width="1792" alt="Screenshot 2023-05-29 at 10 03 54" src="https://github.com/luisw90/TinyBlog/assets/116962905/5d6df75e-2e89-483c-9e3f-8a4e748af672">
 
 ## Responsivness.
